@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('bed_number');
             $table->tinyInteger('bathroom_number');
             $table->smallInteger('surface_sqm');
-            $table->string('full_adress', 255);
+            $table->string('full_address', 255);
             $table->string('image', 255)->nullable();
             $table->tinyInteger('is_visible')->unsigned()->default(1);
             $table->string('latitude', 50)->nullable();
