@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
+use Illuminate\Support\Facades\Storage;
+use App\Functions\Helpers;
+use Illuminate\Support\Facades\Auth;
+
 
 class ApartmentController extends Controller
 {
@@ -16,7 +20,8 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        $apartments = Apartment::where('user_id', Auth::id())->get();
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
@@ -26,7 +31,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        //
+        $apartments = Apartment::all();
+        return view('admin.apartments.create', compact('apartments'));
     }
 
     /**
@@ -37,7 +43,16 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        //
+        $form_data = $request->validated();
+        $form_data['slug'] = Helpers::generateSlug($form_data['title']);
+        if ($request->hasFile('image')) {
+            $path = Storage::put('apartment_images', $request->image);
+            $form_data['image'] = $path;
+        }
+        $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
+        $form_data['user_id'] = Auth::id();
+        $apartment = Apartment::create($form_data);
+        return redirect()->route('admin.apartments.index')->with('message', "L'appartamento è stato aggiunto con successo");
     }
 
     /**
@@ -48,7 +63,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        //
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
@@ -82,6 +97,10 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        if ($apartment->image) {
+            Storage::delete($apartment->image);
+        }
+        $apartment->delete();
+        return redirect()->route('admin.apartments.index')->with('message', "$apartment->title è stato rimosso");
     }
 }

@@ -28,7 +28,14 @@ Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-        // Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
+        Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
     });
 
+
 require __DIR__ . '/auth.php';
+
+////////////////////
+// Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+// Route::resource('projects', ProjectController::class)->parameters(['apartments' => 'apartment:slug']);
+// Route::resource('types', TypeController::class)->parameters(['types' => 'type:slug'])->except('create', 'edit');
+// Route::resource('technologies', TechnologyController::class)->parameters(['technologies' => 'technology:slug'])->except('create', 'edit');
