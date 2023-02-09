@@ -30,7 +30,7 @@ class StoreApartmentRequest extends FormRequest
             'bathroom_number' => ['required'],
             'surface_sqm' => ['required'],
             'full_address' => ['required'],
-            'image' => ['nullable', 'image'],
+            'image' => ['nullable', 'image', 'max:5120'],
             'is_visible' => ['nullable'],
         ];
     }

@@ -94,7 +94,7 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        $form_data = $request->all();
+        $form_data = $request->validated();
         $form_data['slug'] = Helpers::generateSlug($form_data['title']);
         if ($request->hasFile('image')) {
             if ($apartment->image) {

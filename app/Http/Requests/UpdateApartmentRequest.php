@@ -24,7 +24,14 @@ class UpdateApartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'max:100'],
+            'room_number' => ['required'],
+            'bed_number' => ['required'],
+            'bathroom_number' => ['required'],
+            'surface_sqm' => ['required'],
+            'full_address' => ['required'],
+            'image' => ['nullable', 'image', 'max:5120'],
+            'is_visible' => ['nullable'],
         ];
     }
 }
