@@ -18,7 +18,7 @@
                                 <div class="col-md-6">
                                     <input id="first_name" type="text"
                                         class="form-control @error('first_name') is-invalid @enderror" name="first_name"
-                                        value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                        value="{{ old('first_name') }}" autocomplete="first_name" autofocus>
 
                                     @error('first_name')
                                         <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <input id="last_name" type="text"
                                         class="form-control @error('last_name') is-invalid @enderror" name="last_name"
-                                        value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                                        value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
 
                                     @error('last_name')
                                         <span class="invalid-feedback" role="alert">
@@ -50,8 +50,7 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
                                 <div class="col-md-6">
                                     <input id="phone_number" type="text"
-                                        class="form-control @error('phone_number') is-invlid @enderror" name="phone_number"
-                                        required>
+                                        class="form-control @error('phone_number') is-invlid @enderror" name="phone_number">
                                     @error('phone_number')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -65,8 +64,7 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Birth date') }}</label>
                                 <div class="col-md-6">
                                     <input id="birth_date" type="date"
-                                        class="form-control @error('birth_date') is-invalid @enderror" name="birth_date"
-                                        required>
+                                        class="form-control @error('birth_date') is-invalid @enderror" name="birth_date">
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

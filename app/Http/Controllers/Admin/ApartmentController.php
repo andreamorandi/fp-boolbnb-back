@@ -63,7 +63,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        if ($apartment->user_id === Auth::id()) {
+            return view('admin.apartments.show', compact('apartment'));
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -74,7 +78,11 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        if ($apartment->user_id === Auth::id()) {
+            return view('admin.apartments.edit', compact('apartment'));
+        } else {
+            return abort(404);
+        }
     }
 
     /**
@@ -86,7 +94,18 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $form_data = $request->all();
+        $form_data['slug'] = Helpers::generateSlug($form_data['title']);
+        if ($request->hasFile('image')) {
+            if ($apartment->image) {
+                Storage::delete($apartment->image);
+            }
+            $path = Storage::put('apartment_images', $request->image);
+            $form_data['image'] = $path;
+        }
+        $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
+        $apartment->update($form_data);
+        return redirect()->route('admin.apartments.index')->with('message', "$apartment->title è stato aggiornato con successo");
     }
 
     /**

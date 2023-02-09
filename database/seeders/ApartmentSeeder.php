@@ -16,7 +16,7 @@ class ApartmentSeeder extends Seeder
      */
     public function run()
     {
-        $apartments = include database_path('../config/data.php');
+        $apartments = config('data');
         $newApartments = [];
         foreach ($apartments as $key => $apartment) {
             $apartment['slug'] = Helpers::generateSlug($apartment['title']);

@@ -20,6 +20,9 @@
                             <a class="btn btn-primary me-1" href="{{ route('admin.apartments.show', $apartment->slug) }}">
                                 Visualizza
                             </a>
+                            <a class="btn btn-warning me-1" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
+                                Modifica
+                            </a>
                             <form action="{{ route('admin.apartments.destroy', $apartment->slug) }}" method="POST">
                                 @method('DELETE')
                                 @csrf

@@ -128,14 +128,6 @@
                         @enderror
                     </div>
 
-                    {{-- <input class="form-check-input" type="checkbox" name="technologies[]"
-                                    id="technology-{{ $technology->id }}" value="{{ $technology->id }}">
-                                <label class="form-check-label" for="technology-{{ $technology->id }}">
-                                    {{ $technology->name }}</label> --}}
-
-
-
-
                     <button class="btn btn-success" type="submit">Salva</button>
                 </form>
             </div>
