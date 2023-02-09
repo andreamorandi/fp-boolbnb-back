@@ -26,7 +26,8 @@
                             <form action="{{ route('admin.apartments.destroy', $apartment->slug) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger">
+                                <button type="submit" class="btn btn-danger ms_delete-btn"
+                                    delete-text="{{ $apartment->title }}">
                                     <span>&cross;</span>
                                 </button>
                             </form>
@@ -36,4 +37,6 @@
             </tbody>
         </table>
     </div>
+
+    @include('partials.delete_popup')
 @endsection
