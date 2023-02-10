@@ -15,6 +15,10 @@
                         @endif
 
                         {{ __('Benvenuto nella tua dashboard') }}
+
+
+
+                        <a href="{{ route('admin.tomtom') }}" class="btn btn-primary">MAPPA</a>
                     </div>
                 </div>
             </div>
