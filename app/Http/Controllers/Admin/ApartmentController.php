@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use Illuminate\Support\Facades\Storage;
 use App\Functions\Helpers;
+use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -32,7 +33,8 @@ class ApartmentController extends Controller
     public function create()
     {
         $apartments = Apartment::all();
-        return view('admin.apartments.create', compact('apartments'));
+        $services = Service::all();
+        return view('admin.apartments.create', compact('apartments', 'services'));
     }
 
     /**
@@ -52,6 +54,11 @@ class ApartmentController extends Controller
         $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
         $form_data['user_id'] = Auth::id();
         $apartment = Apartment::create($form_data);
+
+        if ($request->has('services')) {
+            $apartment->services()->attach($form_data['services']);
+        }
+
         return redirect()->route('admin.apartments.index')->with('message', "L'appartamento è stato aggiunto con successo");
     }
 
@@ -78,8 +85,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        $services = Service::all();
         if ($apartment->user_id === Auth::id()) {
-            return view('admin.apartments.edit', compact('apartment'));
+            return view('admin.apartments.edit', compact('apartment', 'services'));
         } else {
             return abort(404);
         }
@@ -105,6 +113,14 @@ class ApartmentController extends Controller
         }
         $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
         $apartment->update($form_data);
+
+
+        if ($request->has('services')) {
+            $apartment->services()->sync($form_data['services']);
+        } else {
+            $apartment->services()->sync([]);
+        }
+
         return redirect()->route('admin.apartments.index')->with('message', "$apartment->title è stato aggiornato con successo");
     }
 
@@ -119,6 +135,9 @@ class ApartmentController extends Controller
         if ($apartment->image) {
             Storage::delete($apartment->image);
         }
+
+        $apartment->services()->detach();
+
         $apartment->delete();
         return redirect()->route('admin.apartments.index')->with('message', "$apartment->title è stato rimosso");
     }

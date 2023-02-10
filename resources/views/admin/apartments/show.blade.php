@@ -36,6 +36,14 @@
                 </div>
             @endif
         </div>
+        <h4 class="text-center mt-3">
+            Servizi:
+            @forelse ($apartment->services as $service)
+                <span>#{{ $service->name }}</span>
+            @empty
+                <span>Nessun servizio specificato</span>
+            @endforelse
+        </h4>
         <div class="mt-4 d-inline-block" id="map" style="width: 500px; height: 500px;"></div>
     </div>
     <script>

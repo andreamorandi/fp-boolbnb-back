@@ -31,6 +31,7 @@ class UpdateApartmentRequest extends FormRequest
             'surface_sqm' => ['required'],
             'full_address' => ['required'],
             'image' => ['nullable', 'image', 'max:5120'],
+            'services' => ['exists:services,id'],
             'is_visible' => ['nullable'],
         ];
     }

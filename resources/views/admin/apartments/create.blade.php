@@ -115,6 +115,18 @@
                     </div>
 
                     <div class="form-group mb-3">
+                        <h6>Servizi</h6>
+                        @foreach ($services as $service)
+                            <div class="form-check">
+                                <input type="checkbox" name="services[]" id="service-{{ $service->id }}"
+                                    class="form-check-input" value="{{ $service->id }}" @checked(in_array($service->id, old('services', [])))>
+                                <label for="service-{{ $service->id }}"
+                                    class="form-check-label">{{ $service->name }}</label>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="is_visible">Visibile</label>
                         <input type="checkbox" name="is_visible" id="is_visible"
                             class="form-check-input
