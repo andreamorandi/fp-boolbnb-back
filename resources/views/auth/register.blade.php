@@ -104,7 +104,7 @@
                                         required autocomplete="new-password">
 
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>Password don't match</strong>
+                                        <strong id="error-message-password">Password don't match</strong>
                                     </span>
 
                                     @error('password')

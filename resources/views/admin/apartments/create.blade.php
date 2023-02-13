@@ -5,7 +5,8 @@
         <h2 class="text-center mt-3">Aggiungi un nuovo appartamento</h2>
         <div class="row justify-content-center">
             <div class="col-8">
-                <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
+                <form id="create-apartment" action="{{ route('admin.apartments.store') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-3">
                         <label for="title">Titolo</label>
@@ -140,9 +141,13 @@
                         @enderror
                     </div>
 
-                    <button class="btn btn-success" type="submit">Salva</button>
+                    <button id="submit-btn" class="btn btn-success" type="submit">Salva</button>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+
+<!-- @push('scripts')
+    @vite(['resources/js/latitude-longitude.js'])
+@endpush -->

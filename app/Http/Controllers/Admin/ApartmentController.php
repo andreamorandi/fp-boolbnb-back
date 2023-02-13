@@ -51,6 +51,7 @@ class ApartmentController extends Controller
             $path = Storage::put('apartment_images', $request->image);
             $form_data['image'] = $path;
         }
+
         $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
         $form_data['user_id'] = Auth::id();
         $apartment = Apartment::create($form_data);

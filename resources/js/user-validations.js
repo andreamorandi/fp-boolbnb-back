@@ -1,3 +1,4 @@
+
 const registerBtn = document.getElementById("register-submit-btn");
 const inputMail = document.getElementById("email");
 const inputPassword = document.getElementById("password");
@@ -7,16 +8,8 @@ let mailIsOk = false;
 let passwordIsOk = false;
 
 registerBtn.addEventListener('click', (event) => {
-    event.preventDefault();
     console.log("clicca dai su", inputMail, inputPassword, inputPasswordConfirm);
     console.log(inputMail.value.search("@"));
-    // if ((inputMail.value.search("@") >= 0)
-    //     && (inputMail.value.search(".") > inputMail.value.search("@"))
-    //     && inputMail.value.lenght > inputMail.value.search(".")) {
-    //     console.log("Email formalmente corretta.");
-    // } else {
-    //     console.log("Nuoooooo");
-    // }
 
     if (inputMail.value.match(
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -45,6 +38,7 @@ registerBtn.addEventListener('click', (event) => {
         registerBtn.classList.remove("btn-secondary");
         console.log(mailIsOk);
     } else {
+        event.preventDefault();
         registerBtn.classList.add("btn-secondary");
         registerBtn.classList.remove("btn-primary");
         console.log(passwordIsOk)

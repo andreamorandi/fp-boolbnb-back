@@ -18,9 +18,6 @@
             Numero di bagni: {{ $apartment->bathroom_number }}
         </h4>
         <h4 class="text-center mt-3">
-            Superficie in metri quadri: {{ $apartment->surface_sqm }}
-        </h4>
-        <h4 class="text-center mt-3">
             Indirizzo: {{ $apartment->full_address }}
         </h4>
         <h4 class="text-center mt-3">
@@ -50,27 +47,34 @@
         const apiKey = "icqraNKAcD0A91G90JmWxaTl0MOJPR3a"
         const address = encodeURIComponent("<?php echo $apartment->full_address; ?>")
 
-        axios.get(`https://api.tomtom.com/search/2/geocode/${address}.json?key=${apiKey}`).then(response => {
-                console.log(response);
-                let latitude = response.data.results[0].position.lat;
-                let longitude = response.data.results[0].position.lon;
+        axios.get(`https://api.tomtom.com/search/2/geocode/${address}.json?key=${apiKey}`).then(
+                response => {
+                    console.log(response);
+                    let latitude = response.data.results[0].position.lat;
+                    let longitude = response.data.results[0].position.lon;
 
-                console.log(`latitudine ${latitude}`);
-                console.log(`longitudine ${longitude}`);
+                    console.log(`latitudine ${latitude}`);
+                    console.log(`longitudine ${longitude}`);
+                    // axios.get(
+                    //     `https://api.tomtom.com/search/2/poiSearch/${address}.json?lat=${latitude}&lon=${longitude}&radius={20000}&key=${apiKey}`
+                    // ).then(response => {
+                    //     console.log(response);
+                    // });
 
 
-                let map = tt.map({
-                    key: apiKey,
-                    container: "map",
-                    center: [longitude, latitude],
-                    zoom: 16
+                    let map = tt.map({
+                        key: apiKey,
+                        container: "map",
+                        center: [longitude, latitude],
+                        zoom: 16
+                    })
+
+                    map.on("load", () => {
+                        new tt.Marker().setLngLat([longitude, latitude]).addTo(map)
+                    });
                 })
-
-                map.on("load", () => {
-                    new tt.Marker().setLngLat([longitude, latitude]).addTo(map)
-                })
-            })
             .catch(error => {
+
                 console.log(error);
             });
     </script>
