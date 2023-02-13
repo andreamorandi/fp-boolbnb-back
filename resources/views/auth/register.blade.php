@@ -82,6 +82,10 @@
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email">
 
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Incorrect e-mail format</strong>
+                                    </span>
+
                                     @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -99,6 +103,10 @@
                                         class="form-control @error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
 
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Password don't match</strong>
+                                    </span>
+
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -114,12 +122,16 @@
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" required autocomplete="new-password">
+
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Password don't match</strong>
+                                    </span>
                                 </div>
                             </div>
 
                             <div class="mb-4 row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button id="register-submit-btn" type="submit" class="btn btn-primary">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
@@ -131,3 +143,7 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @vite(['resources/js/user-validations.js'])
+@endpush
