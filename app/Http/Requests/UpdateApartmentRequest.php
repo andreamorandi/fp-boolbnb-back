@@ -25,13 +25,13 @@ class UpdateApartmentRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:100'],
-            'room_number' => ['required'],
-            'bed_number' => ['required'],
-            'bathroom_number' => ['required'],
-            'surface_sqm' => ['required'],
+            'room_number' => ['required', 'numeric', 'integer', 'gt:0'],
+            'bed_number' => ['required', 'numeric', 'integer', 'gt:0'],
+            'bathroom_number' => ['required', 'numeric', 'integer', 'gt:0'],
+            'surface_sqm' => ['required', 'numeric', 'integer', 'gt:0'],
             'full_address' => ['required'],
-            'image' => ['nullable', 'image', 'max:5120'],
-            'services' => ['exists:services,id'],
+            'image' => ['required', 'image', 'max:5120'],
+            'services' => ['required', 'exists:services,id'],
             'is_visible' => ['nullable'],
         ];
     }
