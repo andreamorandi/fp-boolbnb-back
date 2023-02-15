@@ -84,18 +84,20 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="full_address">Indirizzo</label>
-                        <input type="text" id="full_address" name="full_address"
-                            class="form-control 
-                                @error('full_address')
-                                    is-invalid
-                                @enderror"
-                            value="{{ old('full_address') }}">
+                        <input type="hidden" name="full_address" id="full_address">
+                        <div id="address-box"
+                            class="
                         @error('full_address')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        is-invalid
+                        @enderror"
+                            value="{{ old('full_address') }}">
+                            <label for="full_address" class="address-label">Indirizzo</label>
+                            @error('full_address')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -148,6 +150,6 @@
     </div>
 @endsection
 
-<!-- @push('scripts')
-    @vite(['resources/js/latitude-longitude.js'])
-@endpush -->
+@push('scripts')
+    @vite(['resources/js/autocomplete.js'])
+@endpush
