@@ -20,11 +20,12 @@ var searchBoxOptions = {
 
 var searchBox = new tt.plugins.SearchBox(tt.services, searchBoxOptions);
 
+if (fullAddressInput) searchBox.setValue(fullAddressInput.value);
+
 searchBox.on('tomtom.searchbox.resultselected', function (data) {
     fullAddressInput.value = data.data.text;
 });
 
 var searchBoxHTML = searchBox.getSearchBoxHTML();
 
-console.log(addressBox);
 addressBox.append(searchBoxHTML);

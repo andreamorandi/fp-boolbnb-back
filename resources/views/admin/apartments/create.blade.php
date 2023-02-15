@@ -83,8 +83,8 @@
                         @enderror
                     </div>
 
-                    <div class="form-group mb-3">
-                        <input type="hidden" name="full_address" id="full_address">
+                    <div class="form-group mb-5">
+                        <input type="hidden" name="full_address" id="full_address" value="{{ old('full_address') }}">
                         <div id="address-box"
                             class="
                         @error('full_address')
@@ -147,30 +147,8 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // const apiKey = "icqraNKAcD0A91G90JmWxaTl0MOJPR3a"
-        // const fullAddress = document.getElementById("full_address");
-        // const address = "Via Roma 1, 00100 Roma";
-        // const submitBtn = document.getElementById("submit-btn");
-        // const form = document.getElementById("create-apartment");
-
-        // axios.get(`https://api.tomtom.com/search/2/geocode/${address}.json?key=${apiKey}`).then(
-        //         response => {
-        //             console.log(response);
-        //             let latitude = response.data.results[0].position.lat;
-        //             let longitude = response.data.results[0].position.lon;
-
-        //             console.log(`latitudine ${latitude}`);
-        //             console.log(`longitudine ${longitude}`);
-
-        //         })
-        //     .catch(error => {
-        //         console.log(error);
-        //     });
-    </script>
 @endsection
 
-<!-- @push('scripts')
+@push('scripts')
     @vite(['resources/js/apartment-validations.js', 'resources/js/autocomplete.js'])
-@endpush -->
+@endpush

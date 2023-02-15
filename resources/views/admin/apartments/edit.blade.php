@@ -85,19 +85,21 @@
                         @enderror
                     </div>
 
-                    <div class="form-group mb-3">
-                        <label for="full_address">Indirizzo</label>
-                        <input type="text" id="full_address" name="full_address"
-                            class="form-control
-                                @error('full_address')
-                                    is-invalid
-                                @enderror"
+                    <div class="form-group mb-5">
+                        <input type="hidden" name="full_address" id="full_address"
                             value="{{ old('full_address', $apartment->full_address) }}">
+                        <div id="address-box"
+                            class="
                         @error('full_address')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        ms_is-invalid
+                        @enderror">
+                            <label for="full_address" class="address-label">Indirizzo</label>
+                            @error('full_address')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">
@@ -137,9 +139,13 @@
                             {{ old('is_visible', $apartment->is_visible) ? 'checked' : '' }}>
                     </div>
 
-                    <button type="submit" class="btn btn-warning">Salva</button>
+                    <button id="submit-btn" type="submit" class="btn btn-warning">Salva</button>
                 </form>
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    @vite(['resources/js/apartment-validations.js', 'resources/js/autocomplete.js'])
+@endpush

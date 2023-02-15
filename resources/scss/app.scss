@@ -8,7 +8,6 @@
     margin: 0;
     line-height: 1.5;
     margin-top: 40px;
-    margin-bottom: 40px;
     & div:first-child {
         display: none;
     }
@@ -42,6 +41,13 @@
     }
 }
 
-.ms_is-invalid .tt-search-box-input-container {
+.ms_is-invalid {
     border-color: #dc3545;
+    & .tt-search-box-input-container {
+        border-color: #dc3545;
+        &.-focused {
+            border: 1.1px solid black;
+            box-shadow: none;
+        }
+    }
 }
