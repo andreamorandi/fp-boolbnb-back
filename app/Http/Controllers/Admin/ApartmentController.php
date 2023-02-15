@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Functions\Helpers;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -55,6 +55,20 @@ class ApartmentController extends Controller
         $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
         $form_data['user_id'] = Auth::id();
         $apartment = Apartment::create($form_data);
+
+        $address = $form_data['full_address'];
+        $addressApi = urlencode($address);
+        $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $addressApi . ".json?key=icqraNKAcD0A91G90JmWxaTl0MOJPR3a";
+        $response = Http::withOptions(['verify' => false])->get($urlTomTom);
+        $data = json_decode($response->body(), true);
+
+        if ($data["summary"]["totalResults"] == 1) {
+
+            $form_data["latitude"] = $data["results"][0]["position"]["lat"];
+            $form_data["longitude"] = $data["results"][0]["position"]["lon"];
+        } else {
+            return back()->withErrors("$address non è un indirizzo valido!")->withInput();
+        }
 
         if ($request->has('services')) {
             $apartment->services()->attach($form_data['services']);
