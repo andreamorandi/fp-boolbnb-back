@@ -88,9 +88,8 @@
                         <div id="address-box"
                             class="
                         @error('full_address')
-                        is-invalid
-                        @enderror"
-                            value="{{ old('full_address') }}">
+                        ms_is-invalid
+                        @enderror">
                             <label for="full_address" class="address-label">Indirizzo</label>
                             @error('full_address')
                                 <div class="invalid-feedback">
