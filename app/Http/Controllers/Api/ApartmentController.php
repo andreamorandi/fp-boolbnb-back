@@ -59,7 +59,7 @@ class ApartmentController extends Controller
 
             $apartments = $apartments->orderBy('distance')->get();
         } else {
-            $apartments = Apartment::with(['address'])->get();
+            $apartments = Apartment::all();
             // $apartments = Apartment::with(['services', 'address'])->get();
         }
 
