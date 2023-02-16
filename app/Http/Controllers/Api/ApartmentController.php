@@ -30,10 +30,15 @@ class ApartmentController extends Controller
             } else {
                 $range = 20;
             }
-            $apartments = Apartment::with(['services'])
-                ->join('addresses', 'apartments.id', '=', 'addresses.apartment_id')
-                ->selectRaw("apartments.*, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians( latitude ) ) ) ) AS distance")
-                ->havingRaw("distance < {$range}");
+
+            // $apartments = Apartment::with(['services'])
+            // $apartments = Apartment::join('addresses', 'apartments.id', '=', 'addresses.apartment_id')
+            //     ->selectRaw("apartments.*, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians( latitude ) ) ) ) AS distance")
+            //     ->havingRaw("distance < {$range}");
+            // dd($apartments);
+
+            $apartments = Apartment::selectRaw('apartments.*, 6371 * 2 * ASIN(SQRT(POWER(SIN((' . $latitude . ' - abs(apartments.latitude)) * pi()/180 / 2), 2) + COS(' . $latitude . ' * pi()/180 ) * COS( abs(apartments.latitude) * pi()/180) * POWER(SIN((' . $longitude . ' - apartments.longitude) * pi()/180 / 2), 2) )) as distance')
+                ->having('distance', '<', $range);
 
             // if ($request->has('rooms_number')) {
             //     $rooms_number = $request->rooms_number;

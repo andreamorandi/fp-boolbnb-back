@@ -52,10 +52,6 @@ class ApartmentController extends Controller
             $form_data['image'] = $path;
         }
 
-        $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
-        $form_data['user_id'] = Auth::id();
-        $apartment = Apartment::create($form_data);
-
         $address = $form_data['full_address'];
         $addressApi = urlencode($address);
         $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $addressApi . ".json?key=icqraNKAcD0A91G90JmWxaTl0MOJPR3a";
@@ -69,6 +65,11 @@ class ApartmentController extends Controller
         } else {
             return back()->withErrors("$address non è un indirizzo valido!")->withInput();
         }
+
+        $form_data['is_visible'] = $request->has('is_visible') ? 1 : 0;
+        $form_data['user_id'] = Auth::id();
+        $apartment = Apartment::create($form_data);
+
 
         if ($request->has('services')) {
             $apartment->services()->attach($form_data['services']);
