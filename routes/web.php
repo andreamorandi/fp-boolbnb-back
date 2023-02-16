@@ -31,6 +31,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
         Route::get('/tomtom', [TomTomController::class, 'index'])->name('tomtom');
+        Route::get('/messages', [MessageController::class, 'index'])->name('messages');
     });
 
 
