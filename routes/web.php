@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TomTomController;
+use App\Http\Controllers\Admin\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,7 +32,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
         Route::get('/tomtom', [TomTomController::class, 'index'])->name('tomtom');
-        Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+        Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
     });
 
 
