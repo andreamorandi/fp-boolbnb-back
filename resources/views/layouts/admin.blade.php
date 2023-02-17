@@ -79,6 +79,12 @@
                                 <i class="fa-solid fa-folder"></i> Appartamenti
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
+                                href="{{ route('admin.messages.index') }}">
+                                <i class="fa-solid fa-folder"></i> Messaggi
+                            </a>
+                        </li>
                     </ul>
 
 
