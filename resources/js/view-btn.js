@@ -6,18 +6,11 @@ const maxLength = 150;
 
 const preview = document.getElementById('preview-window');
 
-// console.log(viewBtns);
-console.log("text", Stext);
-console.log("text", text[6]);
-
 
 for (let i = 0; i < viewBtns.length; i++) {
     viewBtns[i].addEventListener("mouseover", (event) => {
         const longText = text[i].textContent;
-        console.log("textcontrollo lunghezza", text[i].textContent.length, text[i].textContent);
         const shortText = limitText(longText, maxLength);
-        // console.log("shorttext", longText);
-        // console.log("longtext", longText); // currentMessage = i;
         text[i].textContent = shortText;
         text[i].classList.remove("d-none");
     });

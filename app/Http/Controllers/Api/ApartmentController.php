@@ -14,75 +14,71 @@ class ApartmentController extends Controller
     {
 
         if ($request->has("full_address")) {
-            //Chiamo api tomtom per latitudine e longitudine dell'indirizzo della ricerca
             $address = $request->full_address;
             $urlTomTom = "https://api.tomtom.com/search/2/geocode/" . $address . ".json?key=icqraNKAcD0A91G90JmWxaTl0MOJPR3a";
             $response = Http::withOptions(['verify' => false])->get($urlTomTom);
             $data = json_decode($response->body(), true);
 
-            //Setto latitudie e longitudine
             $latitude = $data["results"][0]["position"]["lat"];
             $longitude = $data["results"][0]["position"]["lon"];
 
-            // checking the range 
             if ($request->has("range")) {
                 $range = $request->range;
             } else {
                 $range = 20;
             }
 
-            // $apartments = Apartment::with(['services'])
-            // $apartments = Apartment::join('addresses', 'apartments.id', '=', 'addresses.apartment_id')
-            //     ->selectRaw("apartments.*, ( 6371 * acos( cos( radians({$latitude}) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians({$longitude}) ) + sin( radians({$latitude}) ) * sin( radians( latitude ) ) ) ) AS distance")
-            //     ->havingRaw("distance < {$range}");
-            // dd($apartments);
-
             $apartments = Apartment::selectRaw('apartments.*, 6371 * 2 * ASIN(SQRT(POWER(SIN((' . $latitude . ' - abs(apartments.latitude)) * pi()/180 / 2), 2) + COS(' . $latitude . ' * pi()/180 ) * COS( abs(apartments.latitude) * pi()/180) * POWER(SIN((' . $longitude . ' - apartments.longitude) * pi()/180 / 2), 2) )) as distance')
                 ->having('distance', '<', $range);
 
-            // if ($request->has('rooms_number')) {
-            //     $rooms_number = $request->rooms_number;
-            //     $apartments = $apartments->where('rooms_number', '>=', $rooms_number);
-            // }
+            if ($request->has('room_number')) {
+                $room_number = $request->room_number;
+                $apartments = $apartments->where('room_number', '>=', $room_number);
+            }
 
-            // if ($request->has('beds_number')) {
-            //     $beds_number = $request->beds_number;
-            //     $apartments = $apartments->where('beds_number', '>=', $beds_number);
-            // }
+            if ($request->has('bed_number')) {
+                $bed_number = $request->bed_number;
+                $apartments = $apartments->where('bed_number', '>=', $bed_number);
+            }
 
-            // if ($request->has('services')) {
-            //     $services = $request->services;
-            //     $apartments = $apartments->whereHas('services', function ($query) use ($services) {
-            //         $query->whereIn('id', $services);
-            //     });
-            // }
+            if ($request->has('services')) {
+                $services = $request->services;
+                $apartments = $apartments->whereHas('services', function ($query) use ($services) {
+                    foreach ($services as $service) {
+                        $query->where('id', $service);
+                    }
+                }, '=', count($services));
+            }
 
             $apartments = $apartments->orderBy('distance')->get();
         } else {
-            $apartments = Apartment::all();
-            // $apartments = Apartment::with(['services', 'address'])->get();
+            $apartments = Apartment::query();
+            if ($request->has('room_number')) {
+                $room_number = $request->room_number;
+                $apartments = $apartments->where('room_number', '>=', $room_number);
+            }
+
+            if ($request->has('bed_number')) {
+                $bed_number = $request->bed_number;
+                $apartments = $apartments->where('bed_number', '>=', $bed_number);
+            }
+
+            if ($request->has('services')) {
+                $services = $request->services;
+                $apartments = $apartments->whereHas('services', function ($query) use ($services) {
+                    foreach ($services as $service) {
+                        $query->where('id', $service);
+                    }
+                }, '=', count($services));
+            }
+            $apartments = $apartments->get();
         }
-
-
-
-        // $services = Service::all();
 
         return response()->json([
             "success" => true,
             "apartments" => $apartments,
-
-            // 'services' => $services
         ]);
     }
-
-
-
-    //     $apartments = Apartment::all();
-    //     return response()->json([
-    //         'success' => true,
-    //         'results' => $apartments
-    //     ]);
-    // }
 
     public function show($slug)
     {

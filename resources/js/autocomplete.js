@@ -20,12 +20,22 @@ var searchBoxOptions = {
 
 var searchBox = new tt.plugins.SearchBox(tt.services, searchBoxOptions);
 
-if (fullAddressInput) searchBox.setValue(fullAddressInput.value);
+if (fullAddressInput.value) searchBox.setValue(fullAddressInput.value);
+
+var inputElement = searchBox.getSearchBoxHTML().querySelector('input');
+inputElement.addEventListener('input', function () {
+    fullAddressInput.value = inputElement.value;
+});
 
 searchBox.on('tomtom.searchbox.resultselected', function (data) {
     fullAddressInput.value = data.data.text;
 });
 
 var searchBoxHTML = searchBox.getSearchBoxHTML();
+
+var closeIcon = searchBoxHTML.querySelector('.tt-search-box-close-icon');
+closeIcon.addEventListener('click', function () {
+    fullAddressInput.value = '';
+});
 
 addressBox.append(searchBoxHTML);

@@ -49,18 +49,8 @@
 
         axios.get(`https://api.tomtom.com/search/2/geocode/${address}.json?key=${apiKey}`).then(
                 response => {
-                    console.log(response);
                     let latitude = response.data.results[0].position.lat;
                     let longitude = response.data.results[0].position.lon;
-
-                    console.log(`latitudine ${latitude}`);
-                    console.log(`longitudine ${longitude}`);
-                    // axios.get(
-                    //     `https://api.tomtom.com/search/2/poiSearch/${address}.json?lat=${latitude}&lon=${longitude}&radius={20000}&key=${apiKey}`
-                    // ).then(response => {
-                    //     console.log(response);
-                    // });
-
 
                     let map = tt.map({
                         key: apiKey,
