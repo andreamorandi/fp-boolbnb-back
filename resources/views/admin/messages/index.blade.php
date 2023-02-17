@@ -35,9 +35,7 @@
                 @foreach ($messages as $key => $message)
                     <div class="col-2">
                         <div id="text-{{ $key }}" class="d-none" id="preview-window"
-                            style="padding: 1rem; background-color: aqua">
-                            {{ $key }}{{ $message->text }}
-                        </div>
+                            style="padding: 1rem; background-color: aqua">{{ $message->text }}</div>
                 @endforeach
             </div>
         </div>

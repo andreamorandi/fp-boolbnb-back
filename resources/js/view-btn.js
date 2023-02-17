@@ -1,21 +1,20 @@
 // Prelevo gli elementi dal DOM
 const viewBtns = document.querySelectorAll('[id^="view-btn-"]');
 const text = document.querySelectorAll('[id^="text-"]');
+const Stext = document.getElementById('text-6')
 const maxLength = 150;
-
-const longText = text.textContent;
 
 const preview = document.getElementById('preview-window');
 
 // console.log(viewBtns);
-// console.log("text", text.length);
-console.log("text", text[0]);
+console.log("text", Stext);
+console.log("text", text[6]);
 
 
 for (let i = 0; i < viewBtns.length; i++) {
     viewBtns[i].addEventListener("mouseover", (event) => {
         const longText = text[i].textContent;
-        console.log("textcontrollo lunghezza", text[i].textContent.length);
+        console.log("textcontrollo lunghezza", text[i].textContent.length, text[i].textContent);
         const shortText = limitText(longText, maxLength);
         // console.log("shorttext", longText);
         // console.log("longtext", longText); // currentMessage = i;
