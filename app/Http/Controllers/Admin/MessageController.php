@@ -26,7 +26,8 @@ class MessageController extends Controller
 
     public function show($id)
     {
+        $apartments = Apartment::all();
         $message = Message::where('id', $id)->first();
-        return view('admin.messages.show', compact('message'));
+        return view('admin.messages.show', compact('message', 'apartments'));
     }
 }
