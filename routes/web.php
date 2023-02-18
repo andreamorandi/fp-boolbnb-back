@@ -34,6 +34,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/tomtom', [TomTomController::class, 'index'])->name('tomtom');
         Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
         Route::get('messages/{id}', [MessageController::class, 'show'])->name('messages.show');
+        Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     });
 
 
