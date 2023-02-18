@@ -8,31 +8,37 @@
     margin: 0;
     line-height: 1.5;
     margin-top: 40px;
+
     & div:first-child {
         display: none;
     }
+
     &.-focused {
         border: 1.1px solid black;
         box-shadow: none;
     }
+
     .tt-search-box-input {
         padding: 0;
         height: 24px;
     }
-    
+
 }
 
 .form-control:focus {
     border: 1.1px solid black;
     box-shadow: none;
 }
+
 #address-box {
     position: relative;
+
     .address-label {
         position: absolute;
         bottom: 40px;
         left: 0px;
     }
+
     .invalid-feedback {
         display: block;
         position: absolute;
@@ -43,8 +49,10 @@
 
 .ms_is-invalid {
     border-color: #dc3545;
+
     & .tt-search-box-input-container {
         border-color: #dc3545;
+
         &.-focused {
             border: 1.1px solid black;
             box-shadow: none;

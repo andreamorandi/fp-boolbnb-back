@@ -6,7 +6,6 @@ const maxLength = 150;
 
 const preview = document.getElementById('preview-window');
 
-
 for (let i = 0; i < viewBtns.length; i++) {
     viewBtns[i].addEventListener("mouseover", (event) => {
         const longText = text[i].textContent;
@@ -15,7 +14,6 @@ for (let i = 0; i < viewBtns.length; i++) {
         text[i].classList.remove("d-none");
     });
     viewBtns[i].addEventListener("mouseleave", (event) => {
-        // currentMessage = i;
         text[i].classList.add("d-none");
     });
 }

@@ -27,7 +27,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-fixed">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">BOOLBNB</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -61,7 +61,6 @@
         </div>
     </nav>
 
-
     <div class="container-fluid vh-100">
         <div class="row h-100">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark navbar-dark sidebar collapse">
@@ -80,7 +79,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.apartments.index' ? 'bg-secondary' : '' }}"
+                            <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.messages.index' ? 'bg-secondary' : '' }}"
                                 href="{{ route('admin.messages.index') }}">
                                 <i class="fa-solid fa-folder"></i> Messaggi
                             </a>
