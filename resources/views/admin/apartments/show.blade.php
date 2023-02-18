@@ -8,12 +8,13 @@
     </div>
     <div class="container">
         <h1 class="text-center mt-3 text-primary">{{ $apartment->title }}</h1>
+        <input type="hidden" id="apartment-id" value="{{ $apartment->id }}">
         <div class="row row-cols-2">
             <div class="col">
                 <div class="text-center w-100 ">
                     @if ($apartment->image)
-                        <img src="{{ asset('storage/' . $apartment->image) }}" alt="{{ 'Immagine di ' . $apartment->title }}"
-                            style="max-height: 100%">
+                        <img src="{{ asset('storage/' . $apartment->image) }}"
+                            alt="{{ 'Immagine di ' . $apartment->title }}" style="max-height: 100%">
                     @else
                         <div class="w-100 bg-secondary ">
                             <img style="max-width:100%" src="{{ Vite::asset('public/images/no-image.jpg') }}"
@@ -50,6 +51,15 @@
         </h5>
         <div class="mt-3 d-inline-block" id="map" style="width: 500px; height: 500px;"></div>
     </div>
+
+    <div>
+        <div>
+            <div style="width: 800px;"><canvas id="myChart"></canvas></div>
+        </div>
+
+        {{ $views }}
+    </div>
+
     <script>
         const apiKey = "icqraNKAcD0A91G90JmWxaTl0MOJPR3a"
         const address = encodeURIComponent("<?php echo $apartment->full_address; ?>")
@@ -76,3 +86,7 @@
             });
     </script>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/statistics.js')
+@endpush

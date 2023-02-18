@@ -2,8 +2,6 @@
 
 @section('content')
     <div class="container relative">
-        {{-- <div class="table-responsive"> --}}
-
         <table class="table margin-200">
             <thead>
                 <div class="row">
@@ -44,20 +42,6 @@
                 @endforeach
             </tbody>
         </table>
-        {{-- </div> --}}
-
-    </div>
-    <div class="col-4">
-        <!-- <div class="preview-mess">
-                                    @foreach ($messages as $key => $message)
-    <div id="text-{{ $key }}" class="d-none" id="preview-window">{{ $message->text }}</div>
-    @endforeach
-                                </div> -->
-    </div>
-    </div>
-    </div>
-
-    </div>
     </div>
 @endsection
 

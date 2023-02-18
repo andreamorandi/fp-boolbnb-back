@@ -9,6 +9,7 @@ use App\Models\Apartment;
 use Illuminate\Support\Facades\Storage;
 use App\Functions\Helpers;
 use App\Models\Service;
+use App\Models\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
@@ -86,8 +87,9 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $views = View::where('apartment_id', $apartment->id)->get();
         if ($apartment->user_id === Auth::id()) {
-            return view('admin.apartments.show', compact('apartment'));
+            return view('admin.apartments.show', compact('apartment', 'views'));
         } else {
             return abort(404);
         }
