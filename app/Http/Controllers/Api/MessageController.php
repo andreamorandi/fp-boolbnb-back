@@ -33,7 +33,7 @@ class MessageController extends Controller
         // dd($new_message);
         $new_message->save();
 
-        Mail::to('admin@boolbnb.com')->send(new NewContact($new_message));
+        // Mail::to('admin@boolbnb.com')->send(new NewContact($new_message));
 
         return response()->json([
             'success' => true
