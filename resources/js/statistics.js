@@ -15,14 +15,11 @@ async function getChart() {
 
         const result = data.reduce((accumulator, currentObject) => {
             const year = currentObject.year;
-            console.log(year);
             if (!accumulator[year]) {
                 accumulator[year] = { data: [], count: 0 };
             }
             accumulator[year].data.push(currentObject);
             accumulator[year].count++;
-            console.log(accumulator[year].count);
-            console.log(accumulator[year].data);
             return accumulator;
         }, {});
 
@@ -45,15 +42,6 @@ async function getChart() {
                     tension: 0.4
                 }]
             },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
         })
     } catch (error) {
         console.error(error);
