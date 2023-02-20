@@ -57,7 +57,6 @@
             <div style="width: 800px;"><canvas id="myChart"></canvas></div>
         </div>
 
-        {{ $views }}
     </div>
 
     <script>
