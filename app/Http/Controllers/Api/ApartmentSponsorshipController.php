@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class ApartmentSponsorshipController extends Controller
 {
-    public function index()
+    public function sponsored()
     {
-        $apartments = Apartment::with('sponsorships')->get();
+        $apartments = Apartment::whereHas('sponsorships', function ($query) {
+            $query->where('end_time', '>=', now());
+        })->get();
+
         return response()->json([
             'success' => true,
             'apartments' => $apartments
