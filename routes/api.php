@@ -22,4 +22,5 @@ Route::get('apartments', [ApartmentController::class, 'index']);
 Route::get('apartments/{slug}', [ApartmentController::class, 'show']);
 Route::get('services', [ServiceController::class, 'index']);
 Route::post('messages', [MessageController::class, 'store']);
+Route::get('views/{apartment_id}', [ViewController::class, 'index']);
 Route::post('views', [ViewController::class, 'store']);
