@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ApartmentController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TomTomController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\SponsorshipController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,27 +22,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('admin.dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware(['auth', 'verified'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
+        Route::get('/apartments/{apartment}/sponsorship', [SponsorshipController::class, 'create'])->name('apartments.sponsorship');
+        Route::post('/apartments/{apartment}/checkout', [SponsorshipController::class, 'checkout'])->name('apartments.checkout');
         Route::get('/tomtom', [TomTomController::class, 'index'])->name('tomtom');
         Route::get('messages', [MessageController::class, 'index'])->name('messages.index');
         Route::get('messages/{id}', [MessageController::class, 'show'])->name('messages.show');
-        Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
     });
 
 
 require __DIR__ . '/auth.php';
-
-////////////////////
-// Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-// Route::resource('projects', ProjectController::class)->parameters(['apartments' => 'apartment:slug']);
-// Route::resource('types', TypeController::class)->parameters(['types' => 'type:slug'])->except('create', 'edit');
-// Route::resource('technologies', TechnologyController::class)->parameters(['technologies' => 'technology:slug'])->except('create', 'edit');

@@ -43,6 +43,12 @@
                         <span>Nessun servizio specificato</span>
                     @endforelse
                 </h5>
+                <div class="btn btn-warning">
+                    <a href="{{ route('admin.apartments.sponsorship', $apartment->slug) }}"
+                        class="link-dark text-decoration-none">Attiva
+                        la Sponsorizzazione
+                    </a>
+                </div>
             </div>
         </div>
         <h5 class=" mt-5">
