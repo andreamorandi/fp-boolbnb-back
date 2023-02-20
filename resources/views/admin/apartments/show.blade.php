@@ -8,12 +8,12 @@
     </div>
     <div class="container">
         <h1 class="text-center mt-3 text-primary">{{ $apartment->title }}</h1>
-        <div class="row row-cols-2">
+        <div class="row w-100 d-flex flex-column flex-md-row">
             <div class="col">
                 <div class="text-center w-100 ">
                     @if ($apartment->image)
                         <img src="{{ asset('storage/' . $apartment->image) }}" alt="{{ 'Immagine di ' . $apartment->title }}"
-                            style="max-height: 100%">
+                            style="max-width: 100%">
                     @else
                         <div class="w-100 bg-secondary ">
                             <img style="max-width:100%" src="{{ Vite::asset('public/images/no-image.jpg') }}"
@@ -23,32 +23,35 @@
                 </div>
             </div>
             <div class="col">
-                <h5 class="mt-3">
-                    Numero stanze: {{ $apartment->room_number }}
-                </h5>
-                <h5 class="mt-3">
-                    Numero letti: {{ $apartment->bed_number }}
-                </h5>
-                <h5 class=" mt-3">
-                    Numero bagni: {{ $apartment->bathroom_number }}
-                </h5>
-                <h5 class=" mt-3">
-                    Superficie in metri quadri: {{ $apartment->surface_sqm }}
-                </h5>
-                <h5 class=" mt-3">
-                    Servizi:
+                <div class="w-100 h-100 d-flex flex-row flex-md-column pt-5">
+                    <h5 class="mt-3 me-3">
+                        <i class="fa-solid fa-sign-hanging"></i> {{ $apartment->room_number }}
+                    </h5>
+                    <h5 class="mt-3 me-3">
+                        <i class="fa-solid fa-bed"></i> {{ $apartment->bed_number }}
+                    </h5>
+                    <h5 class=" mt-3 me-3">
+                        <i class="fa-solid fa-bath"></i> {{ $apartment->bathroom_number }}
+                    </h5>
+                    <h5 class=" mt-3">
+                        <i class="fa-solid fa-crop-simple"></i> {{ $apartment->surface_sqm }}mq
+                    </h5>
+                </div>
+            </div>
+            <div class="mb-3 mt-3">
+                <h5>
                     @forelse ($apartment->services as $service)
                         <span>#{{ $service->name }}</span>
                     @empty
-                        <span>Nessun servizio specificato</span>
+                        <span>Nessun servizio</span>
                     @endforelse
                 </h5>
             </div>
         </div>
         <h5 class=" mt-5">
-            Indirizzo: {{ $apartment->full_address }}
+            <i class="fa-solid fa-location-dot"></i> {{ $apartment->full_address }}
         </h5>
-        <div class="mt-3 d-inline-block" id="map" style="width: 500px; height: 500px;"></div>
+        <div class="mt-3 d-inline-block w-75" id="map" style=" height: 250px;"></div>
     </div>
     <script>
         const apiKey = "icqraNKAcD0A91G90JmWxaTl0MOJPR3a"

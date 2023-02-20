@@ -3,6 +3,7 @@
 
 @section('content')
     <div class="container">
+        <a class="btn btn-success mt-2 mb-2" href="{{ route('admin.apartments.index') }}">Indietro</a>
         <h2 class="text-center">Modifica {{ $apartment->title }}</h2>
         <div class="row justify-content-center">
             <div class="col-8">
