@@ -8,12 +8,13 @@
     </div>
     <div class="container">
         <h1 class="text-center mt-3 text-primary">{{ $apartment->title }}</h1>
+        <input type="hidden" id="apartment-id" value="{{ $apartment->id }}">
         <div class="row w-100 d-flex flex-column flex-md-row">
             <div class="col">
                 <div class="text-center w-100 ">
                     @if ($apartment->image)
-                        <img src="{{ asset('storage/' . $apartment->image) }}" alt="{{ 'Immagine di ' . $apartment->title }}"
-                            style="max-width: 100%">
+                        <img src="{{ asset('storage/' . $apartment->image) }}"
+                            alt="{{ 'Immagine di ' . $apartment->title }}" style="max-width: 100%">
                     @else
                         <div class="w-100 bg-secondary ">
                             <img style="max-width:100%" src="{{ Vite::asset('public/images/no-image.jpg') }}"
