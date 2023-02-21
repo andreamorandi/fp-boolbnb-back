@@ -50,7 +50,7 @@ class ApartmentController extends Controller
                 }, '=', count($services));
             }
 
-            $apartments = $apartments->orderBy('distance')->get();
+            $apartments = $apartments->orderBy('distance')->paginate(5);
         } else {
             $apartments = Apartment::query();
             if ($request->has('room_number')) {
@@ -71,7 +71,7 @@ class ApartmentController extends Controller
                     }
                 }, '=', count($services));
             }
-            $apartments = $apartments->get();
+            $apartments = $apartments->paginate(5);
         }
 
         return response()->json([
