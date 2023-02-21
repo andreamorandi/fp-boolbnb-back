@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
@@ -50,7 +51,28 @@ class ApartmentController extends Controller
                 }, '=', count($services));
             }
 
-            $apartments = $apartments->orderBy('distance')->paginate(5);
+            $filteredApartments = clone $apartments;
+
+            $sponsoredApartments = $apartments->whereHas('sponsorships', function ($query) {
+                $query->where('end_time', '>=', now());
+            })->get();
+
+            $notSponsoredApartments = $filteredApartments->whereDoesntHave('sponsorships')
+                ->orWhereHas('sponsorships', function ($query) {
+                    $query->where('end_time', '<', now());
+                })
+                ->orderBy('distance')
+                ->get();
+
+            $mergedApartments = $sponsoredApartments->merge($notSponsoredApartments);
+
+            $apartments = new LengthAwarePaginator(
+                $mergedApartments->forPage(request()->page, 5),
+                $mergedApartments->count(),
+                5,
+                request()->page,
+                ['path' => url()->current()]
+            );
         } else {
             $apartments = Apartment::query();
             if ($request->has('room_number')) {
@@ -71,7 +93,28 @@ class ApartmentController extends Controller
                     }
                 }, '=', count($services));
             }
-            $apartments = $apartments->paginate(5);
+
+            $filteredApartments = clone $apartments;
+
+            $sponsoredApartments = $apartments->whereHas('sponsorships', function ($query) {
+                $query->where('end_time', '>=', now());
+            })->get();
+
+            $notSponsoredApartments = $filteredApartments->whereDoesntHave('sponsorships')
+                ->orWhereHas('sponsorships', function ($query) {
+                    $query->where('end_time', '<', now());
+                })
+                ->get();
+
+            $mergedApartments = $sponsoredApartments->merge($notSponsoredApartments);
+
+            $apartments = new LengthAwarePaginator(
+                $mergedApartments->forPage(request()->page, 5),
+                $mergedApartments->count(),
+                5,
+                request()->page,
+                ['path' => url()->current()]
+            );
         }
 
         return response()->json([
