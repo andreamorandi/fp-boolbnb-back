@@ -45,11 +45,11 @@ class ApartmentController extends Controller
 
             if ($request->has('services')) {
                 $services = $request->services;
-                $apartments = $apartments->whereHas('services', function ($query) use ($services) {
-                    foreach ($services as $service) {
-                        $query->where('id', $service);
-                    }
-                }, '=', count($services));
+                $apartments = $apartments->where(function ($query) use ($services) {
+                    $query->whereHas('services', function ($subquery) use ($services) {
+                        $subquery->whereIn('id', $services);
+                    }, '>=', count($services));
+                });
             }
 
             $filteredApartments = clone $apartments;
@@ -89,11 +89,11 @@ class ApartmentController extends Controller
 
             if ($request->has('services')) {
                 $services = $request->services;
-                $apartments = $apartments->whereHas('services', function ($query) use ($services) {
-                    foreach ($services as $service) {
-                        $query->where('id', $service);
-                    }
-                }, '=', count($services));
+                $apartments = $apartments->where(function ($query) use ($services) {
+                    $query->whereHas('services', function ($subquery) use ($services) {
+                        $subquery->whereIn('id', $services);
+                    }, '>=', count($services));
+                });
             }
 
             $filteredApartments = clone $apartments;
