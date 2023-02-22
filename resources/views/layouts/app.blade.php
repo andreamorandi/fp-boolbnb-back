@@ -8,6 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+    {{-- <link rel="shortcut icon" herf="{{ asset('bebr.svg') }}" type='image/x-icon'> --}}
+
+    <!-- Title -->
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 
@@ -26,7 +30,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-                    <img id="logo_test" src="{{ asset('storage/Logo/bebr.png') }}" alt="">
+                    <img id="logo" src="{{ asset('images/bebr.png') }}" alt="BeBr logo">
+                    {{-- <img id="logo_test" src="{{ asset('storage/Logo/bebr.png') }}" alt=""> --}}
                     {{-- <div class="logo_laravel">
                         <svg viewBox="0 0 651 192" fill="none" xmlns="http://www.w3.org/2000/svg"
                             style="width: 150px">
@@ -103,7 +108,7 @@
 
 
 <style lang="scss" scoped>
-    #logo_test {
+    #logo {
 
         height: 50px;
     }
