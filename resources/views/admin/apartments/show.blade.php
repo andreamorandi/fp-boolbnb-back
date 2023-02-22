@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-    <a class="btn btn-success mt-4 mb-2" href="{{ route('admin.apartments.index') }}">
-        <i class="fa-solid fa-arrow-left"></i>
-        Indietro</a>
+    <div class="text-start mt-4">
+        <a class="btn btn-success" href="{{ url()->previous() }}">
+            <i class="fa-solid fa-arrow-left">Indietro</i>
+        </a>
+    </div>
     <div class="container">
-        <h1 class="text-center mt-3 text-primary">{{ $apartment->title }}</h1>
         <input type="hidden" id="apartment-id" value="{{ $apartment->id }}">
         <div class="row w-100 d-flex flex-column flex-md-row">
             <div class="col">
@@ -24,20 +25,20 @@
             <div class="col">
                 <div class="w-100 h-100 d-flex flex-row flex-md-column pt-5">
                     <h5 class="mt-3 me-3">
-                        <i class="fa-solid fa-sign-hanging"></i> Stanze: {{ $apartment->room_number }}
+                        <i class="fa-solid fa-sign-hanging"></i> {{ $apartment->room_number }}
                     </h5>
                     <h5 class="mt-3 me-3">
-                        <i class="fa-solid fa-bed"></i> Letti: {{ $apartment->bed_number }}
+                        <i class="fa-solid fa-bed"></i> {{ $apartment->bed_number }}
                     </h5>
-                    <h5 class="mt-3 me-3">
-                        <i class="fa-solid fa-bath"></i> Bagni: {{ $apartment->bathroom_number }}
+                    <h5 class=" mt-3 me-3">
+                        <i class="fa-solid fa-bath"></i> {{ $apartment->bathroom_number }}
                     </h5>
-                    <h5 class="mt-3">
-                        <i class="fa-solid fa-crop-simple"></i> Metri quadrati: {{ $apartment->surface_sqm }}mq
+                    <h5 class=" mt-3">
+                        <i class="fa-solid fa-crop-simple"></i> {{ $apartment->surface_sqm }}mq
                     </h5>
-                    <div class=" mt-3 btn btn-warning">
+                    <div class=" mt-3">
                         <a href="{{ route('admin.apartments.sponsorship', $apartment->slug) }}"
-                            class="text-decoration-none link-dark">Attiva
+                            class="link-dark text-decoration-none btn btn-warning w-50">Attiva
                             la Sponsorizzazione
                         </a>
                     </div>

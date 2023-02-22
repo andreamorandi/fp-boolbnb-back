@@ -18,17 +18,19 @@
                         <td>{{ $apartment->is_visible ? 'Sì' : 'No' }}</td>
                         <td class="d-flex">
                             <a class="btn btn-primary me-1" href="{{ route('admin.apartments.show', $apartment->slug) }}">
-                                <i class="fa-solid fa-eye d-md-none"></i><span class="d-none d-md-block">Visualizza</span>
+                                <i class="fa-solid fa-eye d-md-none"></i><span
+                                    class="text-white d-none d-md-block">Visualizza</span>
                             </a>
                             <a class="btn btn-warning me-1" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
-                                <i class="fa-solid fa-pen d-md-none"></i><span class="d-none d-md-block">Modifica</span>
+                                <i class="fa-solid fa-pen d-md-none"></i><span
+                                    class="text-white d-none d-md-block">Modifica</span>
                             </a>
                             <form action="{{ route('admin.apartments.destroy', $apartment->slug) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
                                 <button type="submit" class="btn btn-danger ms_delete-btn"
                                     delete-text="{{ $apartment->title }}">
-                                    <span>&cross;</span>
+                                    <span class="text-white">&cross;</span>
                                 </button>
                             </form>
                         </td>
