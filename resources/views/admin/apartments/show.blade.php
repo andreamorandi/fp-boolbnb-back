@@ -25,29 +25,39 @@
                 @endif
             </div>
             <div class="col-lg-6 col-sm-12">
+                <div class="row justify-content-center mb-3">
+                    <div class="col-auto">
+                        <h4>Servizi disponibili</h4>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
-                        <h5 class="mt-3 me-3">
+                        <h6>
                             <i class="fa-solid fa-sign-hanging"></i> {{ $apartment->room_number }} Numero di stanze
-                        </h5>
-                        <h5 class="mt-3 me-3">
+                            <hr>
+                        </h6>
+                        <h6>
                             <i class="fa-solid fa-bed"></i> {{ $apartment->bed_number }} Numero di letti
-                        </h5>
-                        <h5 class=" mt-3 me-3">
+                            <hr>
+                        </h6>
+                        <h6>
                             <i class="fa-solid fa-bath"></i> {{ $apartment->bathroom_number }} Numero di bagni
-                        </h5>
-                        <h5 class=" mt-3">
-                            <i class="fa-solid fa-crop-simple"></i> {{ $apartment->surface_sqm }} Superfice in mq
-                        </h5>
+                            <hr>
+                        </h6>
+                        <h6>
+                            <i class="fa-solid fa-crop-simple"></i>
+                            {{ $apartment->surface_sqm }} Superfice in mq
+                            <hr>
+                        </h6>
                     </div>
                     <div class="col-md-6 col-sm-12">
-                        <h5>
-                            @forelse ($apartment->services as $service)
-                                <span>#{{ $service->name }}</span>
-                            @empty
-                                <span>Nessun servizio</span>
-                            @endforelse
-                        </h5>
+                        @forelse ($apartment->services as $service)
+                            <h6>{{ $service->name }}</h6>
+                            <hr>
+                        @empty
+                            <span>Nessun servizio</span>
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -75,7 +85,8 @@
         </div>
     </div>
     <style lang="scss" scoped>
-        h1 {
+        h1,
+        h4 {
             color: #c9e265;
             font-weight: bold
         }
