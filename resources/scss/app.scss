@@ -2,6 +2,10 @@
 @import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 // SEARCH BOX
+#logo {
+    height: 50px;
+}
+
 .tt-search-box-input-container {
     border: 1px solid #ced4da;
     border-radius: 0.375rem;

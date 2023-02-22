@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="container">
+        <a class="btn btn-success mt-4 mb-2" href="{{ route('admin.apartments.index') }}">
+            <i class="fa-solid fa-arrow-left"></i>
+            Indietro</a>
         <h2 class="text-center mt-3">Aggiungi un nuovo appartamento</h2>
         <div class="row justify-content-center">
             <div class="col-8">

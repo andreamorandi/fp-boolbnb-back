@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Favicon -->
+    <link rel="icon" type="" href="{{ asset('BeBr-logo-scheda.svg') }}" />
     <title>@yield('title')</title>
     <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.23.0/maps/maps.css" />
     <link rel="stylesheet" type="text/css"
@@ -29,11 +31,13 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-fixed">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">BOOLBNB</a>
+            <img id="logo" src="{{ asset('images/bebr.png') }}" alt="">
+            {{-- <a class="navbar-brand" href="#">BOOLBNB</a> --}}
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('admin.apartments.index') }}">Index</a>
+                        <a class="nav-link mx-3" aria-current="page"
+                            href="{{ route('admin.apartments.index') }}">Appartamenti</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.apartments.create') }}">Aggiungi un nuovo
@@ -46,7 +50,7 @@
                 <div class="d-inline-block">
                     <a class="nav-link text-white" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                        document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
                     </a>
 
