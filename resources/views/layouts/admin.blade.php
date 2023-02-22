@@ -44,7 +44,7 @@
             </div>
             <div>
                 <div class="d-inline-block">
-                    <a class="nav-link text-white" href="{{ route('logout') }}"
+                    <a class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                         {{ __('Logout') }}
@@ -106,3 +106,11 @@
 </body>
 
 </html>
+
+<style lang="scss"scoped>
+    .nav-link,
+    .fa-solid,
+    span {
+        color: #c9e265;
+    }
+</style>

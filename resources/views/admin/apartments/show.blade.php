@@ -3,70 +3,84 @@
 @section('content')
     <div class="text-start mt-4">
         <a class="btn btn-success" href="{{ url()->previous() }}">
-            <i class="fa-solid fa-arrow-left">Indietro</i>
+            Indietro
         </a>
     </div>
     <div class="container">
-        <h1 class="text-center mt-3 text-primary">{{ $apartment->title }}</h1>
         <input type="hidden" id="apartment-id" value="{{ $apartment->id }}">
-        <div class="row w-100 d-flex flex-column flex-md-row">
-            <div class="col">
-                <div class="text-center w-100 ">
-                    @if ($apartment->image)
-                        <img src="{{ asset('storage/' . $apartment->image) }}"
-                            alt="{{ 'Immagine di ' . $apartment->title }}" style="max-width: 100%">
-                    @else
-                        <div class="w-100 bg-secondary ">
-                            <img style="max-width:100%" src="{{ Vite::asset('public/images/no-image.jpg') }}"
-                                alt="">
-                        </div>
-                    @endif
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <h1>{{ $apartment->title }}</h1>
             </div>
-            <div class="col">
-                <div class="w-100 h-100 d-flex flex-row flex-md-column pt-5">
-                    <h5 class="mt-3 me-3">
-                        <i class="fa-solid fa-sign-hanging"></i> {{ $apartment->room_number }}
-                    </h5>
-                    <h5 class="mt-3 me-3">
-                        <i class="fa-solid fa-bed"></i> {{ $apartment->bed_number }}
-                    </h5>
-                    <h5 class=" mt-3 me-3">
-                        <i class="fa-solid fa-bath"></i> {{ $apartment->bathroom_number }}
-                    </h5>
-                    <h5 class=" mt-3">
-                        <i class="fa-solid fa-crop-simple"></i> {{ $apartment->surface_sqm }}mq
-                    </h5>
-                    <div class=" mt-3">
-                        <a href="{{ route('admin.apartments.sponsorship', $apartment->slug) }}"
-                            class="link-dark text-decoration-none btn btn-warning w-50">Attiva
-                            la Sponsorizzazione
-                        </a>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-lg-6 col-sm-12">
+                @if ($apartment->image)
+                    <img src="{{ asset('storage/' . $apartment->image) }}" alt="{{ 'Immagine di ' . $apartment->title }}"
+                        style="max-width: 100%">
+                @else
+                    <div class="">
+                        <img class="w-100"src="{{ Vite::asset('public/images/no-image.jpg') }}" alt="">
+                    </div>
+                @endif
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <h5 class="mt-3 me-3">
+                            <i class="fa-solid fa-sign-hanging"></i> {{ $apartment->room_number }} Numero di stanze
+                        </h5>
+                        <h5 class="mt-3 me-3">
+                            <i class="fa-solid fa-bed"></i> {{ $apartment->bed_number }} Numero di letti
+                        </h5>
+                        <h5 class=" mt-3 me-3">
+                            <i class="fa-solid fa-bath"></i> {{ $apartment->bathroom_number }} Numero di bagni
+                        </h5>
+                        <h5 class=" mt-3">
+                            <i class="fa-solid fa-crop-simple"></i> {{ $apartment->surface_sqm }} Superfice in mq
+                        </h5>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <h5>
+                            @forelse ($apartment->services as $service)
+                                <span>#{{ $service->name }}</span>
+                            @empty
+                                <span>Nessun servizio</span>
+                            @endforelse
+                        </h5>
                     </div>
                 </div>
             </div>
-            <div class="mb-3 mt-3">
-                <h5>
-                    @forelse ($apartment->services as $service)
-                        <span>#{{ $service->name }}</span>
-                    @empty
-                        <span>Nessun servizio</span>
-                    @endforelse
-                </h5>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <a href="{{ route('admin.apartments.sponsorship', $apartment->slug) }}"
+                        class="link-dark text-decoration-none btn btn-warning mt-3 ">Attiva
+                        la Sponsorizzazione
+                    </a>
+                </div>
+            </div>
+            <h5 class=" mt-3 mb-3">
+                <i class="fa-solid fa-location-dot"></i> {{ $apartment->full_address }}
+            </h5>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div id="map" style="height: 300px;"></div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="chart-container" style="height: 300px;">
+                    <canvas id="myChart"></canvas>
+                </div>
             </div>
         </div>
-        <h5 class=" mt-5">
-            <i class="fa-solid fa-location-dot"></i> {{ $apartment->full_address }}
-        </h5>
-        <div class="mt-3 d-inline-block w-75" id="map" style=" height: 500px;"></div>
     </div>
+    <style lang="scss" scoped>
+        h1 {
+            color: #c9e265;
+            font-weight: bold
+        }
+    </style>
 
-    <div>
-        <div>
-            <div style="width: 800px;"><canvas id="myChart"></canvas></div>
-        </div>
-
-    </div>
 
     <script>
         const apiKey = "icqraNKAcD0A91G90JmWxaTl0MOJPR3a"
