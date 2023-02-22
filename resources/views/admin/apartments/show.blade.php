@@ -73,7 +73,7 @@
                 <i class="fa-solid fa-location-dot"></i> {{ $apartment->full_address }}
             </h5>
         </div>
-        <div class="row">
+        <div class="row mb-5">
             <div class="col-md-6 col-sm-12">
                 <div id="map" style="height: 300px;"></div>
             </div>
