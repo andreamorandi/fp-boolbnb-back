@@ -3,7 +3,7 @@
 @section('content')
     <div class="text-start mt-4">
         <a class="btn btn-success" href="{{ url()->previous() }}">
-            <i class="fa-solid fa-arrow-left">Indietro</i>
+            Indietro
         </a>
     </div>
     <div class="container">
