@@ -56,13 +56,13 @@
                             <h6>{{ $service->name }}</h6>
                             <hr>
                         @empty
-                            <span>Nessun servizio</span>
+                            <h6>Nessun servizio aggiuntivo disponibile </h6>
                         @endforelse
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-auto">
+                <div class="col-auto p-0">
                     <a href="{{ route('admin.apartments.sponsorship', $apartment->slug) }}"
                         class="link-dark text-decoration-none btn btn-warning mt-3 ">Attiva
                         la Sponsorizzazione

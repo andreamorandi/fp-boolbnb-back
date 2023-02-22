@@ -96,7 +96,7 @@
                 </div>
             </nav>
 
-            <main class="col-10 col-md-9 col-lg-10 px-md-4">
+            <main class="col-10 col-md-9 col-lg-10 ">
                 @yield('content')
             </main>
         </div>
