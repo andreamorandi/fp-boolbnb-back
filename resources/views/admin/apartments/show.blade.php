@@ -123,3 +123,5 @@
 @push('scripts')
     @vite('resources/js/statistics.js')
 @endpush
+<p>ciao
+</p>
