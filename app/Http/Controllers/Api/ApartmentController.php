@@ -30,6 +30,7 @@ class ApartmentController extends Controller
             }
 
             $apartments = Apartment::selectRaw('apartments.*, 6371 * 2 * ASIN(SQRT(POWER(SIN((' . $latitude . ' - abs(apartments.latitude)) * pi()/180 / 2), 2) + COS(' . $latitude . ' * pi()/180 ) * COS( abs(apartments.latitude) * pi()/180) * POWER(SIN((' . $longitude . ' - apartments.longitude) * pi()/180 / 2), 2) )) as distance')
+                ->where('is_visible', true)
                 ->having('distance', '<', $range);
 
             if ($request->has('room_number')) {
@@ -74,7 +75,8 @@ class ApartmentController extends Controller
                 ['path' => url()->current()]
             );
         } else {
-            $apartments = Apartment::query();
+            $apartments = Apartment::query()
+                ->where('is_visible', true);
             if ($request->has('room_number')) {
                 $room_number = $request->room_number;
                 $apartments = $apartments->where('room_number', '>=', $room_number);
